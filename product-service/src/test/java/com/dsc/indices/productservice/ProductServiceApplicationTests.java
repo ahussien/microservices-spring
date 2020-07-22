@@ -14,6 +14,7 @@ class ProductServiceApplicationTests {
 
 	@Configuration
 	@ComponentScan("se.magnus")
+	@ComponentScan("com.dsc.indices")
 	public static class SpringConfig {
 
 	}
