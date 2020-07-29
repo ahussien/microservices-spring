@@ -7,6 +7,8 @@ import se.magnus.api.core.product.Product;
 import se.magnus.api.core.product.ProductService;
 import se.magnus.api.core.recommendation.Recommendation;
 import se.magnus.api.core.review.Review;
+import se.magnus.util.exceptions.InvalidInputException;
+import se.magnus.util.exceptions.NotFoundException;
 import se.magnus.util.http.ServiceUtil;
 
 import java.util.ArrayList;
@@ -29,6 +31,9 @@ public class ProductCompositeServiceImpl implements ProductCompositeService {
 
     @Override
     public ProductAggregate getProduct(int productId) {
+        if (productId < 1) throw new InvalidInputException("Invalid productId:" + productId);
+        if (productId == 13) throw new NotFoundException("No product found for productId: " + productId);
+
         Product product = productCompositeIntegration.getProduct(productId);
         List<Recommendation> recommendations = productCompositeIntegration.getRecommendations(productId);
         List<Review> reviews = productCompositeIntegration.getReviews(productId);

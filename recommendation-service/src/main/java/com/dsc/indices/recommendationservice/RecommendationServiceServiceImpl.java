@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import se.magnus.api.core.recommendation.Recommendation;
 import se.magnus.api.core.recommendation.RecommendationService;
+import se.magnus.util.exceptions.InvalidInputException;
+import se.magnus.util.exceptions.NotFoundException;
 import se.magnus.util.http.ServiceUtil;
 
 
@@ -24,6 +26,10 @@ public class RecommendationServiceServiceImpl implements RecommendationService {
 
     @Override
     public List<Recommendation> getRecommendations(int productId) {
+
+        if (productId < 1) throw new InvalidInputException("Invalid productId:" + productId);
+        if (productId == 13) throw new NotFoundException("No product found for productId: " + productId);
+
         ArrayList<Recommendation> recommendations= new ArrayList<Recommendation>(){};
 
         recommendations.add(new Recommendation(productId,1,"Author 1",5,"Best Proudct Ever 1", serviceUtil.getServiceAddress()));
