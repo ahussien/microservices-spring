@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import se.magnus.api.core.product.Product;
+import se.magnus.api.core.product.ProductDto;
 import se.magnus.api.core.product.ProductService;
 import se.magnus.api.core.recommendation.Recommendation;
 import se.magnus.api.core.recommendation.RecommendationService;
@@ -42,10 +42,20 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
     }
 
     @Override
-    public Product getProduct(int productId) {
+    public ProductDto getProduct(int productId) {
         String url = productServiceUrl + productId;
-        Product product = restTemplate.getForObject(url, Product.class);
+        ProductDto product = restTemplate.getForObject(url, ProductDto.class);
         return product;
+    }
+
+    @Override
+    public ProductDto createProduct(ProductDto body) {
+        return null;
+    }
+
+    @Override
+    public void deleteProduct(int productId) {
+
     }
 
     @Override

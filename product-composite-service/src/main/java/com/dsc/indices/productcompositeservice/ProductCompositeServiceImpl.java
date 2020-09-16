@@ -3,15 +3,13 @@ package com.dsc.indices.productcompositeservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import se.magnus.api.composite.product.*;
-import se.magnus.api.core.product.Product;
-import se.magnus.api.core.product.ProductService;
+import se.magnus.api.core.product.ProductDto;
 import se.magnus.api.core.recommendation.Recommendation;
 import se.magnus.api.core.review.Review;
 import se.magnus.util.exceptions.InvalidInputException;
 import se.magnus.util.exceptions.NotFoundException;
 import se.magnus.util.http.ServiceUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +32,7 @@ public class ProductCompositeServiceImpl implements ProductCompositeService {
         if (productId < 1) throw new InvalidInputException("Invalid productId:" + productId);
         if (productId == 13) throw new NotFoundException("No product found for productId: " + productId);
 
-        Product product = productCompositeIntegration.getProduct(productId);
+        ProductDto product = productCompositeIntegration.getProduct(productId);
         List<Recommendation> recommendations = productCompositeIntegration.getRecommendations(productId);
         List<Review> reviews = productCompositeIntegration.getReviews(productId);
 
